@@ -36,9 +36,6 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.output_parsers import StrOutputParser
 
-from classify import OpenAIServiceClass
-
-openaiservice = OpenAIServiceClass()
 
 def generate_system_message(preferences: Dict[str, str]):
     base_msg = """You are a knowledgeable and friendly chef and health assistant. Your role is to strictly answer questions and provide information ONLY about cuisines, recipes, cooking techniques, and general health advice related to food and nutrition, based on the user's preferences.
@@ -93,7 +90,7 @@ async def ask_model(request: MessageRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=80)
 
 
 # somehow we can save previous 5 msgs or summary to reduce costs

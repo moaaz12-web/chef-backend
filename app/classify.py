@@ -8,7 +8,7 @@ class Classification(BaseModel):
 
 class OpenAIServiceClass:
     def __init__(self):
-        self.client = openai.OpenAI(api_key="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")
+        self.client = openai.OpenAI(api_key="sk-YeDDld6nUJfth96un-6AbBTZe4eP_k4rKRcNrfIA")
 
         self.system_prompt_classify_question = """You are a classifier that classifies a message as either health/cooking-related or not. 
         Your task is to output True if user message is related to health/cooking, greetings, general questions etc. 
