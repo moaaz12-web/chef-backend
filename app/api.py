@@ -15,9 +15,9 @@ from typing_extensions import TypedDict
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv()  
 
-openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("API_KEY")
 mongodb_uri = os.getenv("MONGODB_URI")
 
 # Initialize model and MongoDB client
@@ -40,13 +40,14 @@ from langchain_core.output_parsers import StrOutputParser
 def generate_system_message(preferences: Dict[str, str]):
     base_msg = """You are a knowledgeable and friendly chef and health assistant. Your role is to strictly answer questions and provide information ONLY about cuisines, recipes, cooking techniques, and general health advice related to food and nutrition, based on the user's preferences.
     If a user asks about a topic that is unrelated to cooking or health, politely inform them that you can only assist with food and health-related queries. Never make assumptions—always ask the user for clarification if their query is unclear or you need more details to provide an accurate response.
-    """
+    If the query contains any image url, or if it contains the user asking a question about any image, then you MUST respond to the answer properly, without any errors."""
 
     prefs_msg = " ".join([f"{key}: {value}." for key, value in preferences.items()])
     return f"{base_msg} User preferences: {prefs_msg}"
 
 
 def call_model(state: MessagesState, config: RunnableConfig):
+
     preferences = config['configurable']['preferences']
     system_msg = generate_system_message(preferences)
 
